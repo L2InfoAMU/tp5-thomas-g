@@ -40,23 +40,41 @@ public class PaletteRasterImage implements Image {
         return height;
     }
 
-    public void createRepresentation(){
+    public void createRepresentation() {
         this.pixels = new Color[width][height];
-        for(int i = 0; i < this.width; i++){
+        for(int i = 0; i < this.width; i++) {
             for(int j = 0; j < this.height; j++) {
                 pixels[i][j] = this.color;
             }
         }
+        palette.add(color);
     }
 
-    public void setPixelColor(Color color, int x, int y){
-        if(!palette.contains(color)){
+    public void setPixelColor(Color color, int x, int y) {
+        if(!palette.contains(color)) {
             palette.add(color);
         }
         pixels[x][y] = color;
     }
 
-    public void setPixelsColor(Color[][] pixels){
+    public void setPixelsColor(Color[][] pixels) {
         this.pixels = pixels;
     }
+
+    private void setPixelsColor(Color color) {
+        for(int i = 0; i < this.width; i++) {
+            for (int j = 0; j < this.height; j++) {
+                pixels[i][j] = color;
+            }
+        }
+    }
+
+    protected int setWidth(int width) {
+        return this.width = width;
+    }
+
+    protected int setHeiht(int height) {
+        return this.height = height;
+    }
+
 }
