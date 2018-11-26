@@ -18,7 +18,8 @@ public class BruteRasterImage implements Image {
     }
 
     public BruteRasterImage(Color[][] colors) {
-            this.colors = colors;
+        requiresNonNull(colors);
+        this.colors = colors;
     }
 
     @Override
@@ -68,8 +69,5 @@ public class BruteRasterImage implements Image {
     protected int setHeight(int height){
         return this.height = height;
     }
-
-
-
 
 }
