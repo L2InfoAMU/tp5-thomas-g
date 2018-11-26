@@ -11,7 +11,7 @@ public class BruteRasterImage implements Image {
     private Color color;
     private Color[][] colors;
 
-    public BruteRasterImage(int width, int height, Color color) {
+    public BruteRasterImage(Color color, int width, int height) {
         this.width = width;
         this.height = height;
         this.color = color;
