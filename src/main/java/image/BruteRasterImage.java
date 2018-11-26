@@ -38,12 +38,37 @@ public class BruteRasterImage implements Image {
 
     public void createRepresentation(){
         Color[][] matrix = new Color[width][height];
-        for(int i = 0; i < width; i++){
-            for(int j = 0; j < height; j++){
+        for(int i = 0; i < this.width; i++){
+            for(int j = 0; j < this.height; j++){
                 matrix[i][j] = colors[i][j];
             }
         }
     }
+
+    public void setPixelColor(Color color, int x, int y){
+        this.colors[x][y] = color;
+    }
+
+    public void setPixelsColor(Color[][] pixels){
+        this.colors = pixels;
+    }
+
+    private void setPixelsColor(Color color){
+        for(int i = 0; i < this.width; i++) {
+            for (int j = 0; j < this.height; j++) {
+                this.colors[i][j] = color;
+            }
+        }
+    }
+
+    protected int setWidth(int width){
+        return this.width = width;
+    }
+
+    protected int setHeight(int height){
+        return this.height = height;
+    }
+
 
 
 
