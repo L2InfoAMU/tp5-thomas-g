@@ -15,7 +15,6 @@ public class PaletteRasterImage implements Image {
         this.width = width;
         this.height = height;
         this.color = color;
-        this.pixels = new Color[width][height];
         createRepresentation();
     }
 
@@ -47,7 +46,6 @@ public class PaletteRasterImage implements Image {
                 pixels[i][j] = this.color;
             }
         }
-        palette.add(color);
     }
 
     public void setPixelColor(Color color, int x, int y) {
