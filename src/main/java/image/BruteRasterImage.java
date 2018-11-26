@@ -7,19 +7,16 @@ import static util.Matrices.requiresNonZeroDimensions;
 
 public class BruteRasterImage implements Image {
 
+    private Color color;
     private  int width;
     private  int height;
     private Color[][] colors;
 
     public BruteRasterImage(Color color, int width, int height) {
+        this.color = color;
         this.width = width;
         this.height = height;
-        this.colors = new Color[width][height];
-        for(int i = 0; i < this.width; i++){
-            for(int j = 0; j < this.height; j++) {
-                colors[i][j] = color;
-            }
-        }
+        createRepresentation();
     }
 
     public BruteRasterImage(Color[][] colors) {
@@ -49,7 +46,7 @@ public class BruteRasterImage implements Image {
         Color[][] matrix = new Color[width][height];
         for(int i = 0; i < this.width; i++){
             for(int j = 0; j < this.height; j++){
-                matrix[i][j] = colors[i][j];
+                matrix[i][j] = this.color;
             }
         }
     }
