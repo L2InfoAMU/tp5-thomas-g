@@ -3,7 +3,7 @@ package image;
 import javafx.scene.paint.Color;
 import java.util.List;
 
-public class PaletteRasterImage extends RasterImage implements Image {
+public class PaletteRasterImage extends RasterImage {
 
     List<Color> palette;
 
@@ -18,6 +18,7 @@ public class PaletteRasterImage extends RasterImage implements Image {
     @Override
     public void setPixelColor(Color color, int x, int y) {
         super.setPixelColor(color, x, y);
-        if (palette)
+        if (!palette.contains(color))
+            palette.add(color);
     }
 }
