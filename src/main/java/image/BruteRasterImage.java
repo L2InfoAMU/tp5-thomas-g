@@ -24,4 +24,9 @@ public class BruteRasterImage extends RasterImage {
     public Color getPixelColor(int x, int y) {
         return matrix[x][y];
     }
+
+    @Override
+    public void setPixelColor(Color color, int x, int y) {
+        matrix[x][y] = color;
+    }
 }

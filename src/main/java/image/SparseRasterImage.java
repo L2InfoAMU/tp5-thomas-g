@@ -56,6 +56,19 @@ public class SparseRasterImage extends RasterImage implements Map<Point, Color> 
         return super.setHeight(height);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public int size() {
         return 0;

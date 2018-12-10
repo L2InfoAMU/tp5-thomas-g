@@ -1,6 +1,8 @@
 package image;
 
 import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaletteRasterImage extends RasterImage {
@@ -19,6 +21,7 @@ public class PaletteRasterImage extends RasterImage {
     @Override
     public void createRepresentation() {
         matrix = new Color[this.getWidth()][this.getHeight()];
+        palette = new ArrayList<>();
     }
 
     @Override
@@ -28,7 +31,7 @@ public class PaletteRasterImage extends RasterImage {
 
     @Override
     public void setPixelColor(Color color, int x, int y) {
-        super.setPixelColor(color, x, y);
+        matrix[x][y] = color;
         if (!palette.contains(color))
             palette.add(color);
     }
