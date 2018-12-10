@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 public class SparseRasterImage extends RasterImage implements Map<Point, Color> {
 
-    private Map<Point, Color> colorMaps = new HashMap<>();
+    private Map<Point, Color> colorMaps;
 
     public SparseRasterImage(Color color, int width, int height) {
         super(color, width, height);
@@ -21,12 +21,7 @@ public class SparseRasterImage extends RasterImage implements Map<Point, Color> 
 
     @Override
     public void createRepresentation() {
-        for (int i = 0; i < this.getWidth(); i++) {
-            for (int j = 0; j < this.getHeight(); j++) {
-                Point point = new Point(i, j);
-                colorMaps.put(point, this.getPixelColor(i, j));
-            }
-        }
+        colorMaps = new HashMap<>();
     }
 
     @Override
@@ -39,24 +34,6 @@ public class SparseRasterImage extends RasterImage implements Map<Point, Color> 
     public Color getPixelColor(int x, int y) {
         Point point = new Point(x, y);
         return colorMaps.getOrDefault(point, Color.WHITE);
-    }
-
-    @Override
-    public void setPixelsColor(Color[][] pixels) {
-        for (int i = 0; i < pixels.length; i++) {
-            for (int j = 0; j < pixels[0].length; j++) {
-                this.setPixelColor(pixels[i][j], i, j);
-            }
-        }
-    }
-
-    @Override
-    public void setPixelsColor(Color color) {
-        for (int i = 0; i < this.getWidth(); i++) {
-            for (int j = 0; j < this.getHeight(); j++) {
-                this.setPixelColor(color, i, j);
-            }
-        }
     }
 
     @Override
@@ -75,8 +52,8 @@ public class SparseRasterImage extends RasterImage implements Map<Point, Color> 
     }
 
     @Override
-    protected int setHeiht(int height) {
-        return super.setHeiht(height);
+    protected int setHeight(int height) {
+        return super.setHeight(height);
     }
 
     @Override

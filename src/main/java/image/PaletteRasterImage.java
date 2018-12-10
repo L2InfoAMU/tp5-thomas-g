@@ -6,6 +6,7 @@ import java.util.List;
 public class PaletteRasterImage extends RasterImage {
 
     List<Color> palette;
+    Color[][] matrix;
 
     public PaletteRasterImage(Color color, int width, int height) {
         super(color, width, height);
@@ -13,6 +14,16 @@ public class PaletteRasterImage extends RasterImage {
 
     public PaletteRasterImage(Color[][] matrix) {
         super(matrix);
+    }
+
+    @Override
+    public void createRepresentation() {
+        matrix = new Color[this.getWidth()][this.getHeight()];
+    }
+
+    @Override
+    public Color getPixelColor(int x, int y) {
+        return matrix[x][y];
     }
 
     @Override

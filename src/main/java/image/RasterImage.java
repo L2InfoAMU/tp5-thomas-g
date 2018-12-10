@@ -6,16 +6,15 @@ import static util.Matrices.requiresNonZeroDimensions;
 
 public abstract class RasterImage implements Image {
 
-    private Color color;
     private int width;
     private int height;
-    Color[][] matrix;
+
 
     public RasterImage(Color color, int width, int height) {
-        this.color = color;
         this.width = width;
         this.height = height;
         createRepresentation();
+        setPixelsColor(color);
     }
 
     public RasterImage(Color[][] matrix) {
@@ -23,22 +22,14 @@ public abstract class RasterImage implements Image {
         requiresNonZeroDimensions(matrix);
         this.width = matrix.length;
         this.height = matrix[0].length;
-        this.matrix = matrix;
+        createRepresentation();
+        setPixelsColor(matrix);
     }
 
-    public void createRepresentation() {
-        this.matrix = new Color[width][height];
-        for(int i = 0; i < this.width; i++) {
-            for(int j = 0; j < this.height; j++) {
-                matrix[i][j] = this.color;
-            }
-        }
-    }
+    public abstract void createRepresentation();
 
     @Override
-    public Color getPixelColor(int x, int y) {
-        return matrix[x][y];
-    }
+    public abstract Color getPixelColor(int x, int y);
 
     @Override
     public int getWidth() {
@@ -51,17 +42,22 @@ public abstract class RasterImage implements Image {
     }
 
     public void setPixelColor(Color color, int x, int y){
+        Color[][] matrix = new Color[this.getWidth()][this.getHeight()];
         matrix[x][y] = color;
     }
 
     public void setPixelsColor(Color[][] pixels){
-        this.matrix = pixels;
+        for (int i = 0; i < pixels.length; i++) {
+            for (int j = 0; j < pixels[0].length; j++) {
+                this.setPixelColor(pixels[i][j], i, j);
+            }
+        }
     }
 
     public void setPixelsColor(Color color) {
         for(int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
-                matrix[i][j] = color;
+                this.setPixelColor(color, i, j);
             }
         }
     }
@@ -70,7 +66,7 @@ public abstract class RasterImage implements Image {
         return this.width = width;
     }
 
-    protected int setHeiht(int height) {
+    protected int setHeight(int height) {
         return this.height = height;
     }
 }
